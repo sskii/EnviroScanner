@@ -50,7 +50,9 @@ struct NavBar: View {
 
 struct ScannerScene: View {
     
-	@State private var itemAreaExpanded = false
+	@State private var itemAreaExpanded: Bool = false
+	@State private var hasStartedScanning: Bool = false
+	@State private var bottomCardMinHeight: CGFloat = 0
     
 	var body: some View {
 		
@@ -66,6 +68,9 @@ struct ScannerScene: View {
 						.resizable()
 						.aspectRatio(contentMode: .fill)
 						.frame(maxWidth: geo.size.width)
+						.onTapGesture(perform: {
+							self.hasStartedScanning.toggle()
+						})
 					Spacer()
 				}
 				
@@ -73,8 +78,28 @@ struct ScannerScene: View {
 					isOpen: self.$itemAreaExpanded,
 					maxHeight: geo.size.height
 				) {
-					Text("This is where we will provide tips at the app's first launch. Then when our user goes ahead and starts scanning, we'll switch over to showing a preview of the last scan and a specific tip to follow. User can swipe up for more info at any point.")
+					//Text("This is where we will provide tips at the app's first launch. Then when our user goes ahead and starts scanning, we'll switch over to showing a preview of the last scan and a specific tip to follow. User can swipe up for more info at any point.")
+					//	.padding()
+					
+					VStack(spacing: 24) {
+								
+						if(hasStartedScanning) {
+							
+							ScanPreview()
+							SmallTip(title: "Stock up!",
+									 message: "If you can stand the taste, Watties Spaghetti is excellent compared to what you normally buy.")
+							
+						} else {
+							
+							SmallTip(title: "Today's tip",
+									 message: "Bring a 2L container to your shop this afternoon to buy your oats from the bulk bins. Avoid them plastic bags!",
+									 cta: "+ 1 point to your sustainability score")
+							
+						}
+						
+					}.frame(alignment: .top)
 						.padding()
+					
 				}
 				
 			}.frame(maxWidth: .infinity)

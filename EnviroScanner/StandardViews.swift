@@ -27,7 +27,7 @@ struct Title: View {
     var body: some View {
         Text(text)
             .font(.system(size: 28, weight: .medium))
-            .foregroundColor(Color("mediumGreen"))
+            //.foregroundColor(Color("mediumGreen"))
     }
     
 }

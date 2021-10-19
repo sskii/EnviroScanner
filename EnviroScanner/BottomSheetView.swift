@@ -11,14 +11,14 @@ fileprivate enum Constants {
     static let indicatorHeight: CGFloat = 6
     static let indicatorWidth: CGFloat = 100
     static let snapRatio: CGFloat = 0.25
-    static let minHeightRatio: CGFloat = 0.3
+	static let minHeightRatio: CGFloat = 0.4
 }
 
 struct BottomSheetView<Content: View>: View {
     @Binding var isOpen: Bool
 
     let maxHeight: CGFloat
-    let minHeight: CGFloat
+	let minHeight: CGFloat
     let content: Content
 
     @GestureState private var translation: CGFloat = 0
@@ -42,7 +42,7 @@ struct BottomSheetView<Content: View>: View {
 		
 	}
 
-    init(isOpen: Binding<Bool>, maxHeight: CGFloat, @ViewBuilder content: () -> Content) {
+	init(isOpen: Binding<Bool>, maxHeight: CGFloat, @ViewBuilder content: () -> Content) {
         self.minHeight = maxHeight * Constants.minHeightRatio
         self.maxHeight = maxHeight
         self.content = content()
@@ -53,7 +53,7 @@ struct BottomSheetView<Content: View>: View {
         GeometryReader { geometry in
 			ZStack(alignment: .top) {
 				self.content
-					.padding(.top, 64)
+					.padding(.top, 32)
 				self.indicator
             }
             .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
