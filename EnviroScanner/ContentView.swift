@@ -52,7 +52,6 @@ struct ScannerScene: View {
     
 	@State private var itemAreaExpanded: Bool = false
 	@State private var hasStartedScanning: Bool = false
-	@State private var bottomCardMinHeight: CGFloat = 0
     
 	var body: some View {
 		
@@ -80,7 +79,7 @@ struct ScannerScene: View {
 				) {
 					//Text("This is where we will provide tips at the app's first launch. Then when our user goes ahead and starts scanning, we'll switch over to showing a preview of the last scan and a specific tip to follow. User can swipe up for more info at any point.")
 					//	.padding()
-					
+						
 					VStack(spacing: 24) {
 								
 						if(hasStartedScanning) {
