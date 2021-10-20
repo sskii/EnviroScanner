@@ -15,36 +15,82 @@ struct ContentView: View {
         
         VStack {
             
-            NavBar()
-            
-            Spacer()
+            NavBar(currentScene: $currentScene)
             
             if (currentScene == 1) {
                 ScannerScene()
-            }
+			} else if (currentScene == 2) {
+				ReviewScene()
+			} else if (currentScene == 3) {
+				PreferencesView()
+			}
             
-            Spacer()
-            
-        }
+		}.frame(alignment: .top)
         
     }
 }
 
 struct NavBar: View {
     // Pradyun to supply
+	
+	@Binding var currentScene: Int
     
     var body: some View {
         
         HStack {
             
-            Text("Navbar Goes Here")
+			Image(systemName: icons[currentScene])
+			
+            Text(titles[currentScene])
                 .foregroundColor(.black)
+				.font(.system(size: 22, weight: .bold))
+			
+			Spacer()
+			
+			Button {
+				currentScene = nextScene[currentScene + 1]
+			} label: {
+				Image(systemName: icons[currentScene + 1])
+			}
+			
+			Button {
+				currentScene = nextScene[currentScene + 2]
+			} label: {
+				Image(systemName: icons[currentScene + 2])
+			}
             
-        }
+        }.font(.system(size: 22, weight: .bold))
+		.padding()
         .frame(maxWidth: .infinity)
         
         
     }
+	
+	private let titles = [
+		"No scene",
+		"Scan to start",
+		"Review",
+		"Preferences"
+	]
+	
+	private let icons = [
+		"exclamationmark.triangle",
+		"barcode.viewfinder",
+		"clock.arrow.circlepath",
+		"gearshape",
+		"barcode.viewfinder",		// I don't know how to handle rolling the index around in Swift
+		"clock.arrow.circlepath"	// so I'll do it by including repeated definitions. Sorry.
+	]
+	
+	// this corresponds to the scene represented by the above icons
+	private let nextScene = [
+		1,
+		1,
+		2,
+		3,
+		1,
+		2
+	]
     
 }
 
