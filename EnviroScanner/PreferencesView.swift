@@ -10,30 +10,46 @@ import SwiftUI
 public struct AppPrefs {
     private init(){}
     static let onlineMode = "onlineMode"
+	static let tracking = "tracking"
     static let allowFriendRequests = "allowFriendRequests"
 }
 
 
 struct PreferencesView: View {
     @AppStorage(AppPrefs.onlineMode) private var onlineMode = true
+	@AppStorage(AppPrefs.tracking) private var allowTracking = true
     @AppStorage(AppPrefs.allowFriendRequests) private var allowFR = true
     
     var body: some View {
-        Form {
-            onlineSettings
-		}
+        onlineSettings
 	}
     
     var onlineSettings: some View {
-        Section(header: Text("Online")) {
-            // master online mode toggle
-            Toggle(isOn: $onlineMode) { Text("Enable Online Features") }
-            
-            // only show the rest of the online settings if the master one is enabled
-            if onlineMode {
-                Toggle(isOn: $allowFR) { Text("Allow Friend Requests") }
-            }
-        }
+        
+		Form {
+			Section(header: Text("EnviroScanner")) {
+				// master online mode toggle
+				Toggle(isOn: $onlineMode) { Text("Online mode") }
+				Text("Manage linked accounts")
+				Text("View my data")
+			}
+			
+			Section(header: Text("Friends")) {
+				
+				Text("Manage friends")
+				
+				// only show the rest of the online settings if the master one is enabled
+				if onlineMode {
+					Toggle(isOn: $allowFR) { Text("Allow friend requests") }
+				}
+				
+			}
+			
+			Section(header: Text("Privacy")) {
+				Text("Explore our privacy policy")
+				Toggle(isOn: $allowTracking) { Text("Track shopping habits") }
+			}
+		}
 
     }
 }
