@@ -18,20 +18,24 @@ struct ReviewSceneBody: View {
 	
 	var body: some View {
 		
-		VStack(spacing: 16) {
+		ScrollView {
 			
-			VisualisationContainer(currentVisualisation: $preferredVisualisation)
+			VStack(spacing: 16) {
+				
+				VisualisationContainer(currentVisualisation: $preferredVisualisation)
+				
+				// prompt to link scans, if there are any outstanding unliked scans
+				if(numUnlinkedScans > 0) {
+					UnrecognisedScansPrompt(count: $numUnlinkedScans)
+				}
+				
+				SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles. Tap to learn more.", cta: "+ 2 points—you'd get ahead of Bob!")
+				
+				HistoryView()
 			
-			// prompt to link scans, if there are any outstanding unliked scans
-			if(numUnlinkedScans > 0) {
-				UnrecognisedScansPrompt(count: $numUnlinkedScans)
-			}
+			}.padding(16)
 			
-			SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles. Tap to learn more.", cta: "+ 2 points")
-			
-			HistoryView()
-		
-		}.padding(16)
+		}
 		
 	}
 	
@@ -69,7 +73,7 @@ struct SmallTip: View {
 	
 	var body: some View {
 		
-		VSection {
+		StandardSection {
 			
 			if(title != "") {
 				
@@ -265,7 +269,7 @@ struct UnrecognisedScansPrompt: View {
 		Button(action: {
 			self.isReviewPresented.toggle()
 		}) {
-			VSection {
+			StandardSection {
 				
 				HStack {
 				
@@ -305,7 +309,7 @@ struct UnrecognisedScansReview: View {
 	
 	var body: some View {
 		
-		VSection {
+		StandardSection {
 			
 			Button(action: {
 				
@@ -333,18 +337,178 @@ struct UnrecognisedScansReview: View {
 
 struct HistoryView: View {
 	
+	@State var expandedHistory: Bool = false
+	
 	var body: some View {
 		
-		VSection {
-			Text("History view goes here")
-				.font(.headline)
+		StandardSection {
+			
+			HStack {
+				
+				Text("Recent activity")
+					.font(.headline)
+				
+				Spacer()
+				
+				Button {
+					expandedHistory.toggle()
+				} label: {
+					Text("view more")
+				} .sheet(isPresented: $expandedHistory) {
+					
+					StandardSection {
+						Text("Huh, this doesn't exist yet either")
+						Text("Keep lookin' around though :)")
+					}
+					
+				}
+			}
+			
+			HistoryGroup(heading: "Today", score: 2, accent: Color("averageMed")) {
+				
+				HistoryItem(name: "Pams Oats", value: "Poor")
+				HistoryItem(name: "Loose Cabbage", value: "Good")
+				
+			}
+			
+			HistoryGroup(heading: "Yesterday", score: 1, accent: Color("poorMed")) {
+				
+				HistoryItem(name: "Cadbury Dairy Milk", value: "Poor")
+				HistoryItem(name: "Nestle Kit-Kat", value: "Poor")
+				
+			}
+			
+			HistoryGroup(heading: "Last week", score: 3, accent: Color("themeMed")) {
+				
+				HistoryItem(name: "Watties Spaghetti", value: "Good")
+				HistoryItem(name: "Pams Baked Beans", value: "Good")
+				HistoryItem(name: "Earthwise Laundry Powder", value: "Good")
+				HistoryItem(name: "Sanitarium Weet-Bix", value: "Average")
+				
+			}
+			
+//			Text("That's all we've got.")
+//				.padding(.top, 16)
+			
 		}
 		
 	}
 	
 }
 
-struct VSection<Content: View>: View {
+struct HistoryGroup<Content: View>: View {
+	
+	let content: Content
+	let heading: String
+	let score: Int
+	let accent: Color
+	
+	init(heading: String, score: Int, accent: Color, @ViewBuilder content: () -> Content) {
+		self.heading = heading
+		self.score = score
+		self.accent = accent
+		self.content = content()
+	}
+	
+	var body: some View {
+		
+		VStack(alignment: .leading, spacing: 4) {
+		
+			HStack(spacing: 0) {
+				GroupTitle(text: heading, accent: self.accent)
+				Spacer()
+				
+				ForEach(1...score, id:\.self) { _ in
+					Image(systemName: "star.fill")
+						.font(.system(size: 14))
+				}
+				ForEach(score..<3, id:\.self) { _ in
+					Image(systemName: "star")
+						.font(.system(size: 14))
+				}
+				
+			}.foregroundColor(accent)
+			
+//			Rectangle()
+//				.frame(maxHeight: 2)
+//				.foregroundColor(accent)
+			
+			ZStack {
+				
+				Rectangle()
+					.foregroundColor(accent.opacity(0.2))
+					.cornerRadius(10)
+				
+			
+				VStack {
+					self.content
+						.padding(.vertical, 2)
+				}
+				.padding(.horizontal, 8)
+				.padding(.vertical, 12)
+				
+			}.padding(.horizontal, -8)
+				
+				
+	
+			
+		}.padding(.top, 16)
+		
+	}
+	
+}
+
+struct GroupTitle: View {
+	
+	let text: String
+	let accent: Color
+	
+//	init(text: String) {
+//		self.text = text
+//	}
+	
+	var body: some View {
+		
+		Text(text.uppercased())
+			.font(.system(size: 14, weight: .bold))
+			.kerning(1.5)
+			.foregroundColor(accent)
+		
+	}
+	
+}
+
+struct HistoryItem: View {
+	
+	let name: String
+	let value: String
+	
+	init(name: String, value: String) {
+		
+		self.name = name
+		self.value = value
+		
+	}
+	
+	var body: some View {
+		
+		VStack {
+			HStack {
+				
+				Text(name)
+				
+				Spacer()
+				
+				Text(value)
+				
+			}
+		}
+		
+	}
+	
+}
+
+struct StandardSection<Content: View>: View {
 	
 	let content: Content
 	

@@ -21,6 +21,7 @@
 		22C63AF6271F9DEF00D13DAD /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AF1271F9DEE00D13DAD /* PagerView.swift */; };
 		22C63AF7271F9DEF00D13DAD /* LHSViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AF2271F9DEE00D13DAD /* LHSViews.swift */; };
 		22C63AF8271F9DEF00D13DAD /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AF3271F9DEF00D13DAD /* BottomSheetView.swift */; };
+		22C63AFC271FC5B600D13DAD /* MultiDimensionalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AFB271FC5B600D13DAD /* MultiDimensionalList.swift */; };
 		469791E4271F930200016B46 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469791E3271F930200016B46 /* PreferencesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		22C63AF1271F9DEE00D13DAD /* PagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		22C63AF2271F9DEE00D13DAD /* LHSViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LHSViews.swift; sourceTree = "<group>"; };
 		22C63AF3271F9DEF00D13DAD /* BottomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		22C63AFB271FC5B600D13DAD /* MultiDimensionalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiDimensionalList.swift; sourceTree = "<group>"; };
 		469791E3271F930200016B46 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				469791E3271F930200016B46 /* PreferencesView.swift */,
 				22C63ACB271F5F3F00D13DAD /* Assets.xcassets */,
 				22C63ACD271F5F3F00D13DAD /* Preview Content */,
+				22C63AFB271FC5B600D13DAD /* MultiDimensionalList.swift */,
 			);
 			path = EnviroScanner;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				469791E4271F930200016B46 /* PreferencesView.swift in Sources */,
 				22C63AF5271F9DEF00D13DAD /* RHSViews.swift in Sources */,
 				22C63AF7271F9DEF00D13DAD /* LHSViews.swift in Sources */,
+				22C63AFC271FC5B600D13DAD /* MultiDimensionalList.swift in Sources */,
 				22C63AF4271F9DEF00D13DAD /* StandardViews.swift in Sources */,
 				22C63AF8271F9DEF00D13DAD /* BottomSheetView.swift in Sources */,
 				22C63AEB271F9DDD00D13DAD /* PagerView.swift in Sources */,
