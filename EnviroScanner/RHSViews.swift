@@ -69,7 +69,7 @@ struct SmallTip: View {
 	
 	var body: some View {
 		
-		StandardSection {
+		VSection {
 			
 			if(title != "") {
 				
@@ -265,7 +265,7 @@ struct UnrecognisedScansPrompt: View {
 		Button(action: {
 			self.isReviewPresented.toggle()
 		}) {
-			StandardSection {
+			VSection {
 				
 				HStack {
 				
@@ -305,7 +305,7 @@ struct UnrecognisedScansReview: View {
 	
 	var body: some View {
 		
-		VStack {
+		VSection {
 			
 			Button(action: {
 				
@@ -335,7 +335,7 @@ struct HistoryView: View {
 	
 	var body: some View {
 		
-		StandardSection {
+		VSection {
 			Text("History view goes here")
 				.font(.headline)
 		}
@@ -344,7 +344,7 @@ struct HistoryView: View {
 	
 }
 
-struct StandardSection<Content: View>: View {
+struct VSection<Content: View>: View {
 	
 	let content: Content
 	
