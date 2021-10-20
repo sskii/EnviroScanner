@@ -11,11 +11,7 @@
 		22C63ACA271F5F3C00D13DAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AC9271F5F3C00D13DAD /* ContentView.swift */; };
 		22C63ACC271F5F3F00D13DAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22C63ACB271F5F3F00D13DAD /* Assets.xcassets */; };
 		22C63ACF271F5F3F00D13DAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22C63ACE271F5F3F00D13DAD /* Preview Assets.xcassets */; };
-		22C63AD6271F607000D13DAD /* StandardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AD5271F607000D13DAD /* StandardViews.swift */; };
-		22C63ADA271F608C00D13DAD /* RHSViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AD9271F608C00D13DAD /* RHSViews.swift */; };
-		22C63ADC271F60AC00D13DAD /* LHSViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63ADB271F60AC00D13DAD /* LHSViews.swift */; };
-		22C63ADE271F6A2900D13DAD /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63ADD271F6A2900D13DAD /* BottomSheetView.swift */; };
-		22C63AE4271F8C0700D13DAD /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AE3271F8C0700D13DAD /* PagerView.swift */; };
+		469791E4271F930200016B46 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469791E3271F930200016B46 /* PreferencesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,11 +20,7 @@
 		22C63AC9271F5F3C00D13DAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		22C63ACB271F5F3F00D13DAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22C63ACE271F5F3F00D13DAD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		22C63AD5271F607000D13DAD /* StandardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardViews.swift; sourceTree = "<group>"; };
-		22C63AD9271F608C00D13DAD /* RHSViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RHSViews.swift; sourceTree = "<group>"; };
-		22C63ADB271F60AC00D13DAD /* LHSViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHSViews.swift; sourceTree = "<group>"; };
-		22C63ADD271F6A2900D13DAD /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
-		22C63AE3271F8C0700D13DAD /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
+		469791E3271F930200016B46 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +56,7 @@
 			children = (
 				22C63AC7271F5F3C00D13DAD /* EnviroScannerApp.swift */,
 				22C63AC9271F5F3C00D13DAD /* ContentView.swift */,
-				22C63AE3271F8C0700D13DAD /* PagerView.swift */,
-				22C63AD5271F607000D13DAD /* StandardViews.swift */,
-				22C63ADD271F6A2900D13DAD /* BottomSheetView.swift */,
-				22C63AD9271F608C00D13DAD /* RHSViews.swift */,
-				22C63ADB271F60AC00D13DAD /* LHSViews.swift */,
+				469791E3271F930200016B46 /* PreferencesView.swift */,
 				22C63ACB271F5F3F00D13DAD /* Assets.xcassets */,
 				22C63ACD271F5F3F00D13DAD /* Preview Content */,
 			);
@@ -158,6 +146,7 @@
 				22C63ADC271F60AC00D13DAD /* LHSViews.swift in Sources */,
 				22C63ACA271F5F3C00D13DAD /* ContentView.swift in Sources */,
 				22C63AD6271F607000D13DAD /* StandardViews.swift in Sources */,
+				469791E4271F930200016B46 /* PreferencesView.swift in Sources */,
 				22C63AC8271F5F3C00D13DAD /* EnviroScannerApp.swift in Sources */,
 				22C63ADE271F6A2900D13DAD /* BottomSheetView.swift in Sources */,
 			);
