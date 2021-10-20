@@ -38,24 +38,24 @@ struct HistoryView: View {
 			
 			HistoryGroup(heading: "Today", score: 2, accent: Color("averageMed")) {
 				
-				HistoryItem(name: "Pams Oats", value: "Poor")
-				HistoryItem(name: "Loose Cabbage", value: "Good")
+				HistoryItem(name: "Pams Oats", value: 1)
+				HistoryItem(name: "Loose Cabbage", value: 3)
 				
 			}
 			
 			HistoryGroup(heading: "Yesterday", score: 1, accent: Color("poorMed")) {
 				
-				HistoryItem(name: "Cadbury Dairy Milk", value: "Poor")
-				HistoryItem(name: "Nestle Kit-Kat", value: "Poor")
+				HistoryItem(name: "Cadbury Dairy Milk", value: 1)
+				HistoryItem(name: "Nestle Kit-Kat", value: 1)
 				
 			}
 			
 			HistoryGroup(heading: "Last week", score: 3, accent: Color("themeMed")) {
 				
-				HistoryItem(name: "Watties Spaghetti", value: "Good")
-				HistoryItem(name: "Pams Baked Beans", value: "Good")
-				HistoryItem(name: "Earthwise Laundry Powder", value: "Good")
-				HistoryItem(name: "Sanitarium Weet-Bix", value: "Average")
+				HistoryItem(name: "Watties Spaghetti", value: 3)
+				HistoryItem(name: "Pams Baked Beans", value: 3)
+				HistoryItem(name: "Earthwise Laundry Powder", value: 3)
+				HistoryItem(name: "Sanitarium Weet-Bix", value: 2)
 				
 			}
 			
@@ -90,14 +90,7 @@ struct HistoryGroup<Content: View>: View {
 				GroupTitle(text: heading, accent: self.accent)
 				Spacer()
 				
-				ForEach(1...score, id:\.self) { _ in
-					Image(systemName: "star.fill")
-						.font(.system(size: 14))
-				}
-				ForEach(score..<3, id:\.self) { _ in
-					Image(systemName: "star")
-						.font(.system(size: 14))
-				}
+				StarRating(score: score)
 				
 			}.foregroundColor(accent)
 			
@@ -130,6 +123,25 @@ struct HistoryGroup<Content: View>: View {
 	
 }
 
+struct StarRating: View {
+	
+	let score: Int
+	
+	var body: some View {
+		
+		ForEach(1...score, id:\.self) { _ in
+			Image(systemName: "star.fill")
+				.font(.system(size: 14))
+		}
+		ForEach(score..<3, id:\.self) { _ in
+			Image(systemName: "star")
+				.font(.system(size: 14))
+		}
+		
+	}
+	
+}
+
 struct GroupTitle: View {
 	
 	let text: String
@@ -153,14 +165,7 @@ struct GroupTitle: View {
 struct HistoryItem: View {
 	
 	let name: String
-	let value: String
-	
-	init(name: String, value: String) {
-		
-		self.name = name
-		self.value = value
-		
-	}
+	let value: Int
 	
 	var body: some View {
 		
@@ -171,7 +176,9 @@ struct HistoryItem: View {
 				
 				Spacer()
 				
-				Text(value)
+				HStack(spacing: 0) {
+					StarRating(score: value)
+				}.foregroundColor(.secondary)
 				
 			}
 		}

@@ -36,7 +36,7 @@ struct VisualisationContainer: View {
 			}
 		}
 		.foregroundColor(.white)
-		.frame(height: 300)
+		.frame(height: 250)
 	}
 	
 }

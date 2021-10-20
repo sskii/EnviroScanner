@@ -106,7 +106,7 @@ struct ScannerScene: View {
 				
 				VStack {
 					Text("Competitive progress bar goes here")
-					Text("Scan preview goes here and fills up remaining space")
+					
 					Text("View size:  (\(geo.size.width), \(geo.size.height))")
 					
 					Image("scanPreview")
