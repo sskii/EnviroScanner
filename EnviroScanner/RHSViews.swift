@@ -24,7 +24,7 @@ struct ReviewSceneBody: View {
 			
 			UnrecognisedScansPrompt(count: $numUnlinkedScans)
 			
-			SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles", cta: "+ 2 points")
+			SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles. Tap to learn more.", cta: "+ 2 points")
 			
 			HistoryView()
 		
@@ -262,32 +262,29 @@ struct UnrecognisedScansPrompt: View {
 		Button(action: {
 			self.isReviewPresented.toggle()
 		}) {
-			HStack {
-			
-				Image(systemName: "questionmark.circle")
-					.font(.system(size: 24, weight: .light))
-					.padding()
+			StandardSection {
 				
-				VStack(alignment: .leading, spacing: 4) {
-					
-					Text("You have \(count) unrecognised scans")
-						.font(.headline)
-					
-					Text("Tap here to review these scans and enter the items manually.")
+				HStack {
 				
+					Image(systemName: "questionmark.circle")
+						.font(.system(size: 24, weight: .light))
+						.padding()
+					
+					VStack(alignment: .leading, spacing: 4) {
+						
+						Text("You have \(count) unrecognised scans")
+							.font(.headline)
+						
+						Text("Tap here to review these scans and enter the items manually.")
+					
+					}
+					
 				}
 				
-			}
-			.multilineTextAlignment(.leading)
-			.padding()
-			.frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
-			.background(Color("themeLight"))
-			.foregroundColor(.primary)
+			}.background(Color("themeLight"))
+				.foregroundColor(.primary)
 			
 		}.sheet(isPresented: $isReviewPresented, onDismiss: {count = 0}) {
-			
-			// does not work as intended
-			//self.background(.ultraThinMaterial)
 			
 			UnrecognisedScansReview(isShown: $isReviewPresented)
 			
@@ -334,7 +331,33 @@ struct HistoryView: View {
 	
 	var body: some View {
 		
-		Text("History view goes here")
+		StandardSection {
+			Text("History view goes here")
+				.font(.headline)
+		}
+		
+	}
+	
+}
+
+struct StandardSection<Content: View>: View {
+	
+	let content: Content
+	
+	init(@ViewBuilder content: () -> Content) {
+		
+		self.content = content()
+		
+	}
+	
+	var body: some View {
+			
+		VStack(alignment: .leading) {
+			self.content
+		}
+		.multilineTextAlignment(.leading)
+		.padding()
+		.frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
 		
 	}
 	
