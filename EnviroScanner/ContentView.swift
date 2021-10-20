@@ -10,15 +10,16 @@ import SwiftUI
 struct ContentView: View {
     
     @State var currentScene: Int = 1;
+	@State var pageTitle: String = "No title"
     
     var body: some View {
         
         VStack {
             
-            NavBar(currentScene: $currentScene)
+			NavBar(currentScene: $currentScene, title: $pageTitle)
             
             if (currentScene == 1) {
-                ScannerScene()
+				ScannerScene(title: $pageTitle)
 			} else if (currentScene == 2) {
 				ReviewScene()
 			} else if (currentScene == 3) {
@@ -34,6 +35,7 @@ struct NavBar: View {
     // Pradyun to supply
 	
 	@Binding var currentScene: Int
+	@Binding var title: String
     
     var body: some View {
         
@@ -41,7 +43,7 @@ struct NavBar: View {
             
 			Image(systemName: icons[currentScene])
 			
-            Text(titles[currentScene])
+			Text(showsDynamicTitle[currentScene] ? title : defaultTitles[currentScene])
                 .foregroundColor(.black)
 				.font(.system(size: 22, weight: .bold))
 			
@@ -64,13 +66,20 @@ struct NavBar: View {
         .frame(maxWidth: .infinity)
         
         
-    }
+	}
 	
-	private let titles = [
+	private let defaultTitles = [
 		"No scene",
 		"Scan to start",
 		"Review",
 		"Preferences"
+	]
+	
+	private let showsDynamicTitle = [
+		false,
+		true,
+		false,
+		false
 	]
 	
 	private let icons = [
@@ -98,16 +107,28 @@ struct ScannerScene: View {
     
 	@State private var itemAreaExpanded: Bool = false
 	@State private var hasStartedScanning: Bool = false
+	@State private var isLoading: Bool = false
+	
+	@Binding var title: String
     
 	var body: some View {
 		
 		GeometryReader { geo in
 			ZStack {
 				
-				VStack {
-					Text("Competitive progress bar goes here")
+				VStack(spacing: -16) {
 					
-					Text("View size:  (\(geo.size.width), \(geo.size.height))")
+					ZStack(alignment: .bottom) {
+						
+						Rectangle()
+							.foregroundColor(.white)
+							.cornerRadius(16)
+						
+						CompetitiveVisualisation()
+						
+					}.frame(maxWidth: .infinity, maxHeight: 70)
+						.zIndex(2)
+					
 					
 					Image("scanPreview")
 						.resizable()
@@ -115,8 +136,11 @@ struct ScannerScene: View {
 						.frame(maxWidth: geo.size.width)
 						.onTapGesture(perform: {
 							self.hasStartedScanning.toggle()
+							title = (hasStartedScanning ? "Scanner" : "Scan to start")
 						})
+					
 					Spacer()
+					
 				}
 				
 				BottomSheetView(
@@ -133,12 +157,29 @@ struct ScannerScene: View {
 							ScanPreview()
 							SmallTip(title: "Stock up!",
 									 message: "If you can stand the taste, Watties Spaghetti is excellent compared to what you normally buy.")
+							ScanDetails()
 							
 						} else {
 							
 							SmallTip(title: "Today's tip",
 									 message: "Bring a 2L container to your shop this afternoon to buy your oats from the bulk bins. Avoid them plastic bags!",
 									 cta: "+ 1 point to your sustainability score")
+							
+							HStack {
+								if(isLoading) {
+									ActivityIndicator(isAnimating: .constant(true), style: .medium)
+									Text("Loading more tips")
+									Spacer()
+								} else {
+									Button {
+										itemAreaExpanded.toggle()
+										isLoading.toggle()
+									} label: {
+										Text("Load more tips…")
+										Spacer()
+									}
+								}
+							}
 							
 						}
 						
@@ -148,10 +189,27 @@ struct ScannerScene: View {
 				}
 				
 			}.frame(maxWidth: .infinity)
+			.onAppear { title = (hasStartedScanning ? "Scanner" : "Scan to start") }
 			
 		}
     }
     
+}
+
+// spinner thingy
+// https://www.codegrepper.com/code-examples/swift/swiftui+spinner
+struct ActivityIndicator: UIViewRepresentable {
+
+	@Binding var isAnimating: Bool
+	let style: UIActivityIndicatorView.Style
+
+	func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView {
+		return UIActivityIndicatorView(style: style)
+	}
+
+	func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>) {
+		isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {

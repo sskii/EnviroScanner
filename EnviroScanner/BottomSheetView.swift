@@ -57,10 +57,12 @@ struct BottomSheetView<Content: View>: View {
 				self.indicator
             }
             .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
-            .background(VisualEffectView(effect: UIBlurEffect(style: .extraLight)))
+			.background(VisualEffectView(effect: UIBlurEffect(style: .regular)))
+			.background(.white.opacity(0.9))
             .cornerRadius(Constants.radius)
             .frame(height: geometry.size.height, alignment: .bottom)
             .offset(y: max(self.offset + self.translation, 0))
+			.shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 0)
             .animation(.interactiveSpring())
             .gesture(
                 DragGesture().updating(self.$translation) { value, state, _ in

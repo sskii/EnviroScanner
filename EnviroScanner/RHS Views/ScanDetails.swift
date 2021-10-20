@@ -15,9 +15,11 @@ struct ScanPreview: View {
 		
 		VStack(alignment: .leading) {
 			
-			Title(text: "Watties Spaghetti")
-				.frame(maxWidth: .infinity,
-					   alignment: .leading)
+			HStack {
+				Title(text: "Watties Spaghetti")
+				Spacer()
+				StarRating(score: 3)
+			}
 			
 			HStack {
 				
@@ -41,11 +43,15 @@ struct ScanPreview: View {
 
 struct ScanDetails: View {
 	
-	@State var signalErrMsg: String = "Signal an error"
+	@State var signalErrMsg: String = "Improve this data"
 	
 	var body: some View {
 		
-		VStack(alignment: .leading, spacing: 12) {
+		StandardSection() {
+			
+			Text("About this product")
+				.padding(.top, 16)
+				.font(.headline)
 			
 			Text("This item recieved a rating of average based on the following data maintained by the community.")
 			
@@ -59,17 +65,21 @@ struct ScanDetails: View {
 			} label: {
 				
 				Text(signalErrMsg)
-					.foregroundColor(Color("mediumGreen"))
+					.foregroundColor(Color("themeMed"))
 				
 			}
 			
-			Text("Item purchase history")
+		}
+		
+		StandardSection {
+			
+			Text("Product purchase history")
 				.padding(.top, 16)
 				.font(.headline)
 			
 			Text("This is the first time you've bought this.")
 		
-		}.frame(maxWidth: .infinity, alignment: .leading)
+		}
 		
 	}
 	
@@ -104,11 +114,12 @@ struct QuantityPrompt: View {
 		// create the message
 		if(count > 0) {
 			
-			ResetableCouterText(count: $count, text: "\(count) \(rating.lowercased())-rated \(count > 1 ? "items" : "item")")
+			//ResetableCouterText(count: $count, text: "\(count) \(rating.lowercased())-rated \(count > 1 ? "items" : "item")")
+			ResetableCouterText(count: $count, text: "I'm buying \(count)")
 			
 		} else {
 			
-			ResetableCouterText(count: $count, text: "\(rating.capitalized)-rated item removed")
+			ResetableCouterText(count: $count, text: "I've put it back")
 			
 		}
 	}

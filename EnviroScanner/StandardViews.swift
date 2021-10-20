@@ -56,12 +56,23 @@ struct StandardSection<Content: View>: View {
 	
 	var body: some View {
 			
-		VStack(alignment: .leading) {
+		VStack(alignment: .leading, spacing: 8) {
 			self.content
 		}
 		.multilineTextAlignment(.leading)
 		.frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
 		
+	}
+	
+}
+
+// define theme stuff
+struct Theme {
+	
+	struct c {
+		let light = Color("themeLight")
+		let med = Color("themeMed")
+		let dark = Color("themeDark")
 	}
 	
 }
