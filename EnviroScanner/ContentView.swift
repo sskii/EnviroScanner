@@ -41,26 +41,51 @@ struct NavBar: View {
     var body: some View {
         
         HStack {
-            
 			Image(systemName: icons[currentScene])
-			
 			Text(showsDynamicTitle[currentScene] ? title : defaultTitles[currentScene])
                 .foregroundColor(.black)
 				.font(.system(size: 22, weight: .bold))
 			
 			Spacer()
 			
-			Button {
-				currentScene = nextScene[currentScene + 1]
-			} label: {
-				Image(systemName: icons[currentScene + 1])
+			switch currentScene {
+			case 1:
+				Button(action: { currentScene = 2 }) {
+					Image(systemName: "clock.arrow.circlepath")
+				}
+				Button(action: {currentScene = 3}) {
+					Image(systemName: "gearshape")
+				}
+			case 2:
+				Button(action: { currentScene = 1 }) {
+					Image(systemName: "barcode.viewfinder")
+				}
+				Button(action: { currentScene = 3 }) {
+					Image(systemName: "gearshape")
+				}
+			case 3:
+				Button(action: { currentScene = 1 }) {
+					Image(systemName: "barcode.viewfinder")
+				}
+				Button(action: {currentScene = 2}) {
+					Image(systemName: "clock.arrow.circlepath")
+				}
+			default:
+				Text("shrug")
 			}
 			
-			Button {
-				currentScene = nextScene[currentScene + 2]
-			} label: {
-				Image(systemName: icons[currentScene + 2])
-			}
+			
+//			Button {
+//				currentScene = nextScene[currentScene + 1]
+//			} label: {
+//				Image(systemName: icons[currentScene + 1])
+//			}
+//
+//			Button {
+//				currentScene = nextScene[currentScene + 2]
+//			} label: {
+//				Image(systemName: icons[currentScene + 2])
+//			}
             
         }.font(.system(size: 22, weight: .bold))
 		.padding()

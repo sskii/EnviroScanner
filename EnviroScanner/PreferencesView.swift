@@ -26,29 +26,42 @@ struct PreferencesView: View {
     
     var onlineSettings: some View {
         
-		Form {
-			Section(header: Text("EnviroScanner")) {
-				// master online mode toggle
-				Toggle(isOn: $onlineMode) { Text("Online mode") }
-				Text("Manage linked accounts")
-				Text("View my data")
-			}
-			
-			Section(header: Text("Friends")) {
-				
-				Text("Manage friends")
-				
-				// only show the rest of the online settings if the master one is enabled
-				if onlineMode {
-					Toggle(isOn: $allowFR) { Text("Allow friend requests") }
+		NavigationView {
+			Form {
+				Section(header: Text("EnviroScanner")) {
+					// master online mode toggle
+					Toggle(isOn: $onlineMode) { Text("Online mode") }
+					
+					NavigationLink { Text("Linked Accounts") } label: {
+						Text("Manage Linked Accounts")
+					}
+
 				}
 				
+				Section(header: Text("Friends")) {
+					Text("Manage friends")
+					// only show the rest of the online settings if the master one is enabled
+					if onlineMode {
+						Toggle(isOn: $allowFR) { Text("Allow friend requests") }
+					}
+					
+				}
+				
+				Section(header: Text("Privacy")) {
+					Toggle(isOn: $allowTracking) { Text("Track shopping habits") }
+					
+					NavigationLink {Text( "Privacy Policy") } label: {
+						Text("Explore our Privacy Policy")
+					}
+					NavigationLink { Text("data") } label: {
+						Text("View your Data")
+					}
+
+				}
 			}
-			
-			Section(header: Text("Privacy")) {
-				Text("Explore our privacy policy")
-				Toggle(isOn: $allowTracking) { Text("Track shopping habits") }
-			}
+			.navigationBarHidden(true)
+			.onAppear { UITableView.appearance().backgroundColor = .clear } // removes the grey background on forms to make it fit in with the rest of the app
+			.onDisappear { UITableView.appearance().backgroundColor = .systemGroupedBackground }
 		}
 
     }
