@@ -14,7 +14,7 @@ import SwiftUI
 struct ReviewSceneBody: View {
 	
 	@State var preferredVisualisation: Int = 1;
-	var numUnlinkedScans: Int = 2;
+	@State var numUnlinkedScans: Int = 2;
 	
 	var body: some View {
 		
@@ -22,7 +22,7 @@ struct ReviewSceneBody: View {
 			
 			VisualisationContainer(currentVisualisation: $preferredVisualisation)
 			
-			UnrecognisedScansPrompt(count: numUnlinkedScans)
+			UnrecognisedScansPrompt(count: $numUnlinkedScans)
 			
 			SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles", cta: "+ 2 points")
 			
@@ -255,7 +255,7 @@ struct VisualisationContainer: View {
 struct UnrecognisedScansPrompt: View {
 	
 	@State var isReviewPresented: Bool = false
-	var count: Int
+	@Binding var count: Int
 	
 	var body: some View {
 		
@@ -284,7 +284,10 @@ struct UnrecognisedScansPrompt: View {
 			.background(Color("themeLight"))
 			.foregroundColor(.primary)
 			
-		}.sheet(isPresented: $isReviewPresented) {
+		}.sheet(isPresented: $isReviewPresented, onDismiss: {count = 0}) {
+			
+			// does not work as intended
+			//self.background(.ultraThinMaterial)
 			
 			UnrecognisedScansReview(isShown: $isReviewPresented)
 			
