@@ -44,6 +44,28 @@ struct VisualEffectView: UIViewRepresentable {
 	func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
 
+struct StandardSection<Content: View>: View {
+	
+	let content: Content
+	
+	init(@ViewBuilder content: () -> Content) {
+		
+		self.content = content()
+		
+	}
+	
+	var body: some View {
+			
+		VStack(alignment: .leading) {
+			self.content
+		}
+		.multilineTextAlignment(.leading)
+		.frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
+		
+	}
+	
+}
+
 
 struct StandardViews_Previews: PreviewProvider {
     static var previews: some View {
