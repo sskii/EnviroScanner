@@ -24,9 +24,11 @@ struct ReviewSceneBody: View {
 			
 			UnrecognisedScansPrompt(count: numUnlinkedScans)
 			
+			SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles", cta: "+ 2 points")
+			
 			Text("History preview goes here")
 		
-		}
+		}.padding(16)
 		
 	}
 	
@@ -322,6 +324,12 @@ struct UnrecognisedScansReview: View {
 		}
 		
 	}
+	
+}
+
+struct HistoryView: View {
+	
+	
 	
 }
 
