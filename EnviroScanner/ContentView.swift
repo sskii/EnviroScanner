@@ -116,6 +116,15 @@ struct ScannerScene: View {
 		GeometryReader { geo in
 			ZStack {
 				
+				Image("scanPreview")
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(maxWidth: geo.size.width, maxHeight: geo.size.height)
+					.onTapGesture(perform: {
+						self.hasStartedScanning.toggle()
+						title = (hasStartedScanning ? "Scanner" : "Scan to start")
+					})
+				
 				VStack(spacing: -16) {
 					
 					ZStack(alignment: .bottom) {
@@ -129,17 +138,8 @@ struct ScannerScene: View {
 					}.frame(maxWidth: .infinity, maxHeight: 70)
 						.zIndex(2)
 					
-					
-					Image("scanPreview")
-						.resizable()
-						.aspectRatio(contentMode: .fill)
-						.frame(maxWidth: geo.size.width)
-						.onTapGesture(perform: {
-							self.hasStartedScanning.toggle()
-							title = (hasStartedScanning ? "Scanner" : "Scan to start")
-						})
-					
 					Spacer()
+					
 					
 				}
 				
@@ -172,7 +172,7 @@ struct ScannerScene: View {
 									Spacer()
 								} else {
 									Button {
-										itemAreaExpanded.toggle()
+										itemAreaExpanded = true
 										isLoading.toggle()
 									} label: {
 										Text("Load more tips…")
@@ -188,7 +188,9 @@ struct ScannerScene: View {
 					
 				}
 				
-			}.frame(maxWidth: .infinity)
+			}
+			.edgesIgnoringSafeArea(.bottom)
+			.frame(maxWidth: .infinity)
 			.onAppear { title = (hasStartedScanning ? "Scanner" : "Scan to start") }
 			
 		}
