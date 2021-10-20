@@ -27,6 +27,7 @@ struct ContentView: View {
 			}
             
 		}.frame(alignment: .top)
+		.accentColor(Color("themeMed"))
         
     }
 }
