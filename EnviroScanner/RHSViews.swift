@@ -10,6 +10,28 @@
 
 import SwiftUI
 
+// the review scene body
+struct ReviewSceneBody: View {
+	
+	@State var preferredVisualisation: Int = 1;
+	var numUnlinkedScans: Int = 2;
+	
+	var body: some View {
+		
+		VStack(spacing: 16) {
+			
+			VisualisationContainer(currentVisualisation: $preferredVisualisation)
+			
+			UnrecognisedScansPrompt(count: numUnlinkedScans)
+			
+			Text("History preview goes here")
+		
+		}
+		
+	}
+	
+}
+
 struct RHSViews: View {
     var body: some View {
 		VStack {
@@ -203,8 +225,108 @@ struct ResetableCouterText: View {
 	
 }
 
+struct VisualisationContainer: View {
+	
+	@Binding var currentVisualisation: Int
+
+	var body: some View {
+		PagerView(pageCount: 3, currentIndex: $currentVisualisation) {
+			ZStack {
+				Color.red
+				Text("Area for visualisation 1")
+			}
+			ZStack {
+				Color.green
+				Text("Visualisation 2")
+			}
+			ZStack {
+				Color.blue
+				Text("Visualisation 3")
+			}
+		}
+		.foregroundColor(.white)
+		.frame(height: 300)
+	}
+	
+}
+
+struct UnrecognisedScansPrompt: View {
+	
+	@State var isReviewPresented: Bool = false
+	var count: Int
+	
+	var body: some View {
+		
+		Button(action: {
+			self.isReviewPresented.toggle()
+		}) {
+			HStack {
+			
+				Image(systemName: "questionmark.circle")
+					.font(.system(size: 24, weight: .light))
+					.padding()
+				
+				VStack(alignment: .leading, spacing: 4) {
+					
+					Text("You have \(count) unrecognised scans")
+						.font(.headline)
+					
+					Text("Tap here to review these scans and enter the items manually.")
+				
+				}
+				
+			}
+			.multilineTextAlignment(.leading)
+			.padding()
+			.frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
+			.background(Color("themeLight"))
+			.foregroundColor(.primary)
+			
+		}.sheet(isPresented: $isReviewPresented) {
+			
+			UnrecognisedScansReview(isShown: $isReviewPresented)
+			
+		}
+			
+		
+	}
+	
+}
+
+struct UnrecognisedScansReview: View {
+	
+	@Binding var isShown: Bool
+	
+	var body: some View {
+		
+		VStack {
+			
+			Button(action: {
+				
+				self.isShown.toggle()
+				
+			}) {
+				Image(systemName: "xmark.circle.fill")
+					.foregroundColor(.secondary)
+					.font(.system(size: 32, weight: .light))
+					.padding()
+			}.frame(maxWidth: .infinity, alignment: .leading)
+			
+			Spacer()
+			
+			Text("Thanks for finding me.\n\nUnfortunately, this feature isn't yet available in the prototype version :(\n\nLet's just say that the devs will sort out your \"unrecognised scans\" for you.\n\nJust swipe back down to dismiss this sheet.")
+				.padding()
+			
+			Spacer()
+			
+		}
+		
+	}
+	
+}
+
 struct RHSViews_Previews: PreviewProvider {
     static var previews: some View {
-        RHSViews()
+        ReviewSceneBody()
     }
 }
