@@ -30,12 +30,8 @@ struct ScanPreview: View {
 				
 			}//.foregroundColor(Color("darkGreen"))
 			
-			Stepper(value: $cartCount, in: 0 ... 100) {
+			QuantityPrompt(count: $cartCount, rating: "average")
 				
-				QuantityPrompt(count: $cartCount, rating: "average")
-				
-			}
-		
 		}
 	}
 	
@@ -115,11 +111,16 @@ struct QuantityPrompt: View {
 		if(count > 0) {
 			
 			//ResetableCouterText(count: $count, text: "\(count) \(rating.lowercased())-rated \(count > 1 ? "items" : "item")")
-			ResetableCouterText(count: $count, text: "I'm buying \(count)")
+			
+			
+				ResetableCouterText(count: $count, text: "I'm buying \(count)")
+			
 			
 		} else {
 			
-			ResetableCouterText(count: $count, text: "I've put it back")
+			
+				ResetableCouterText(count: $count, text: "I've put it back")
+			
 			
 		}
 	}
@@ -129,21 +130,67 @@ struct QuantityPrompt: View {
 struct ResetableCouterText: View {
 	
 	@Binding var count: Int
+	@State var enterQty: Bool = false
+	@State var entryString: String = ""
 	var text: String
 	var resetValue: Int = 1
 	
 	var body: some View {
 		
-		Button {
+		HStack {
 			
-			count = resetValue;
+			if(enterQty) {
+				
+				
+				TextField("Enter a quantity", text: $entryString)
+					.frame(alignment: .leading)
+					.keyboardType(.decimalPad)
+				
+				Spacer()
+				
+				Button {
+					
+					count = Int(entryString) ?? count
+					enterQty = false
+					
+				} label: {
+					Text("Update")
+				}
+
+			} else {
+				
+				Stepper(value: $count, in: 0 ... 100) {
+					
+					Button {
+						
+						if(count != resetValue)
+						{
+							
+							count = resetValue
+							
+						} else {
+							
+							entryString = ""
+							enterQty = true
+							
+						}
+						
+					} label: {
+						
+						if(!enterQty) {
+							
+							Text(text)
+								.foregroundColor(.black)
+							
+						}
+						
+					}
+					
+				}
+				
+			}
 			
-		} label: {
-			
-			Text(text)
-				.foregroundColor(.black)
-			
-		}
+		}.frame(minHeight: 32)
 		
 	}
 	

@@ -168,7 +168,7 @@ struct ScannerScene: View {
 							HStack {
 								if(isLoading) {
 									ActivityIndicator(isAnimating: .constant(true), style: .medium)
-									Text("Loading more tips")
+									Text("Pondering more tips")
 									Spacer()
 								} else {
 									Button {
@@ -189,7 +189,7 @@ struct ScannerScene: View {
 				}
 				
 			}
-			.edgesIgnoringSafeArea(.bottom)
+			.ignoresSafeArea()
 			.frame(maxWidth: .infinity)
 			.onAppear { title = (hasStartedScanning ? "Scanner" : "Scan to start") }
 			
