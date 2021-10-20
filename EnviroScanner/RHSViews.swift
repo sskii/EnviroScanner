@@ -22,7 +22,10 @@ struct ReviewSceneBody: View {
 			
 			VisualisationContainer(currentVisualisation: $preferredVisualisation)
 			
-			UnrecognisedScansPrompt(count: $numUnlinkedScans)
+			// prompt to link scans, if there are any outstanding unliked scans
+			if(numUnlinkedScans > 0) {
+				UnrecognisedScansPrompt(count: $numUnlinkedScans)
+			}
 			
 			SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles. Tap to learn more.", cta: "+ 2 points")
 			
@@ -66,7 +69,7 @@ struct SmallTip: View {
 	
 	var body: some View {
 		
-		VStack(alignment: .leading) {
+		StandardSection {
 			
 			if(title != "") {
 				
@@ -281,8 +284,9 @@ struct UnrecognisedScansPrompt: View {
 					
 				}
 				
-			}.background(Color("themeLight"))
-				.foregroundColor(.primary)
+			}.padding()
+			.background(Color("themeLight"))
+			.foregroundColor(.primary)
 			
 		}.sheet(isPresented: $isReviewPresented, onDismiss: {count = 0}) {
 			
@@ -356,7 +360,6 @@ struct StandardSection<Content: View>: View {
 			self.content
 		}
 		.multilineTextAlignment(.leading)
-		.padding()
 		.frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
 		
 	}
