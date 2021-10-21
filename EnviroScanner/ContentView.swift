@@ -116,16 +116,6 @@ struct NavBar: View {
 		"barcode.viewfinder",		// I don't know how to handle rolling the index around in Swift
 		"clock.arrow.circlepath"	// so I'll do it by including repeated definitions. Sorry.
 	]
-	
-	// this corresponds to the scene represented by the above icons
-	private let nextScene = [
-		1,
-		1,
-		2,
-		3,
-		1,
-		2
-	]
     
 }
 
