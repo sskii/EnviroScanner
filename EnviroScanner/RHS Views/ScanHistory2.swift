@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HistorySummary: View {
 	
-	@State var expandedHistory: Bool = false
+	@State var expandedHistory: Bool = true
 	@State var period: Int = 2		// current history period (to be graphed etc)
 	
 	var body: some View {
@@ -114,7 +114,6 @@ struct HistoryEntry/*<Content: View>*/: View {
 struct DetailedHistory: View {
 	
 	@State var selectionUUID: UUID? = nil
-	@State var expandedDetails: Bool = false
 	
 	var body: some View {
 		
@@ -126,8 +125,8 @@ struct DetailedHistory: View {
 					
 					Section(header: Text("This afternoon")) {
 						
-						DetailedHistoryEntry(name: "Sanutarium Weet-Bix", rating: 2, selectionUUID: $selectionUUID)
-						DetailedHistoryEntry(name: "Pic's Peanut Butter", qty: "2", rating: 3, selectionUUID: $selectionUUID)
+						DetailedHistoryEntry(name: "Sanitarium Weet-Bix", rating: 2, selectionUUID: $selectionUUID)
+						DetailedHistoryEntry(name: "Pic's Peanut Butter", qty: 2, rating: 3, selectionUUID: $selectionUUID)
 						DetailedHistoryEntry(name: "Nestle Nutella", rating: 1, selectionUUID: $selectionUUID)
 						DetailedHistoryEntry(name: "Bluebird Ready Salted", rating: 1, selectionUUID: $selectionUUID)
 						
@@ -159,7 +158,7 @@ struct DetailedHistory: View {
 struct DetailedHistoryEntry: View {
 	
 	let name: String
-	var qty: String = ""
+	@State var qty: Int = 1
 	let rating: Int
 	
 	@Binding var selectionUUID: UUID?
@@ -167,19 +166,39 @@ struct DetailedHistoryEntry: View {
 	
 	var body: some View {
 		
-		HStack(spacing: 4) {
-			Text(name)
-			if(qty != "") { Image(systemName: "multiply") }
-			Text(qty)
-			Spacer()
-			StarRating(score: rating)
-		}
-		.font(myUUID == selectionUUID ? .system(size: 16, weight: .bold) : .body)
-		.foregroundColor(myUUID == selectionUUID ? History.accents[rating] : .primary)
-		.contentShape(Rectangle())
-		.onTapGesture {
-			selectionUUID = myUUID
-		}
+		VStack(alignment: .leading) {
+			
+			HStack(spacing: 4) {
+				Text(name)
+				Spacer()
+				if(myUUID != selectionUUID) {
+					if(qty > 1) {
+						Text(String(qty))
+						Image(systemName: "multiply")
+							.font(.system(size: 12))
+					}
+				}
+				StarRating(score: rating)
+			}
+			.font(myUUID == selectionUUID ? .system(size: 24, weight: .bold) : .body)
+			.foregroundColor(myUUID == selectionUUID ? History.accents[rating] : .primary)
+			.contentShape(Rectangle())
+			.onTapGesture {
+				selectionUUID = selectionUUID == myUUID ? nil : myUUID
+			}
+			
+			if(myUUID == selectionUUID) {
+				Text("Added by barcode: 987654321")
+				
+				Spacer().frame(maxHeight: 16)
+				
+				QuantityPrompt(count: $qty)
+				ScanDetails()
+				
+				Spacer().frame(maxHeight: 16)
+			}
+			
+		}.listRowBackground(myUUID == selectionUUID ? History.accents[rating].opacity(0.1) : .white)
 		
 	}
 	

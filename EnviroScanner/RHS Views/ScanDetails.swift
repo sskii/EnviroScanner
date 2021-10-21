@@ -30,7 +30,7 @@ struct ScanPreview: View {
 				
 			}//.foregroundColor(Color("darkGreen"))
 			
-			QuantityPrompt(count: $cartCount, rating: "average")
+			QuantityPrompt(count: $cartCount)
 				
 		}
 	}
@@ -63,19 +63,17 @@ struct ScanDetails: View {
 				Text(signalErrMsg)
 					.foregroundColor(Color("themeMed"))
 				
-			}
+			}.buttonStyle(PlainButtonStyle())
 			
 		}
 		
-		StandardSection {
-			
-			Text("Product purchase history")
-				.padding(.top, 16)
-				.font(.headline)
-			
-			Text("This is the first time you've bought this.")
-		
-		}
+//		StandardSection {
+//			Text("Product purchase history")
+//				.padding(.top, 16)
+//				.font(.headline)
+//
+//			Text("This is the first time you've bought this.")
+//		}
 		
 	}
 	
@@ -101,9 +99,6 @@ struct DatabaseRow: View {
 struct QuantityPrompt: View {
 	
 	@Binding var count: Int
-	var rating: String
-	
-	var message: String = ""
 	
 	var body: some View {
 		
@@ -155,7 +150,7 @@ struct ResetableCouterText: View {
 					
 				} label: {
 					Text("Update")
-				}
+				}.buttonStyle(PlainButtonStyle())
 
 			} else {
 				
@@ -184,7 +179,7 @@ struct ResetableCouterText: View {
 							
 						}
 						
-					}
+					}.buttonStyle(PlainButtonStyle())
 					
 				}
 				
