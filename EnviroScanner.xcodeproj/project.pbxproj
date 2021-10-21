@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2221A4382720F97C0031A074 /* ScanHistory2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221A4372720F97C0031A074 /* ScanHistory2.swift */; };
 		22C63AC8271F5F3C00D13DAD /* EnviroScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AC7271F5F3C00D13DAD /* EnviroScannerApp.swift */; };
 		22C63ACA271F5F3C00D13DAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C63AC9271F5F3C00D13DAD /* ContentView.swift */; };
 		22C63ACC271F5F3F00D13DAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22C63ACB271F5F3F00D13DAD /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		2221A4362720C42F0031A074 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2221A4372720F97C0031A074 /* ScanHistory2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanHistory2.swift; sourceTree = "<group>"; };
 		22C63AC4271F5F3C00D13DAD /* EnviroScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnviroScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C63AC7271F5F3C00D13DAD /* EnviroScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnviroScannerApp.swift; sourceTree = "<group>"; };
 		22C63AC9271F5F3C00D13DAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				22C63AFE271FDDDD00D13DAD /* UnrecognisedScans.swift */,
 				22C63B00271FDE9A00D13DAD /* ScanHistory.swift */,
+				2221A4372720F97C0031A074 /* ScanHistory2.swift */,
 				22C63B02271FDF0B00D13DAD /* ScanDetails.swift */,
 				22C63B04271FDF7800D13DAD /* Tips.swift */,
 				22C63B06271FDFAC00D13DAD /* Visualisations.swift */,
@@ -202,6 +205,7 @@
 				22C63ACA271F5F3C00D13DAD /* ContentView.swift in Sources */,
 				22C63AF6271F9DEF00D13DAD /* PagerView.swift in Sources */,
 				22C63B03271FDF0B00D13DAD /* ScanDetails.swift in Sources */,
+				2221A4382720F97C0031A074 /* ScanHistory2.swift in Sources */,
 				22C63AEC271F9DDD00D13DAD /* StandardViews.swift in Sources */,
 				22C63B01271FDE9A00D13DAD /* ScanHistory.swift in Sources */,
 				22C63AEA271F9DDD00D13DAD /* BottomSheetView.swift in Sources */,
