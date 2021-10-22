@@ -29,7 +29,11 @@ struct ReviewScene: View {
 					UnrecognisedScansPrompt(count: $numUnlinkedScans)
 				}
 				
+				Spacer().frame(maxHeight: 16)
+				
 				SmallTip(title: "Sponsored tip", message: "Beach Road Milk is 10 mins away by bike and offers milk in reusable glass bottles. Tap to learn more.", cta: "+ 2 points—you'd get ahead of Bob!")
+				
+				Spacer().frame(maxHeight: 16)
 				
 				HistorySummary()
 			

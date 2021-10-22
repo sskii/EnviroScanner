@@ -10,7 +10,7 @@ import SwiftUI
 struct HistorySummary: View {
 	
 	@State var expandedHistory: Bool = false
-	@State var period: Int = 2		// current history period (to be graphed etc)
+	@State var period: Int = 3		// current history period (to be graphed etc)
 	
 	var body: some View {
 		

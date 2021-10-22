@@ -33,8 +33,12 @@ struct VisualisationContainer: View {
 				Text("Area for visualisation 1")
 			}
 			ZStack {
-				Color.green
-				Text("Visualisation 2")
+				GeometryReader { geo in
+					Image("vis2")
+						.resizable()
+						.aspectRatio(contentMode: .fit)
+						.frame(maxWidth: geo.size.width, maxHeight: geo.size.height)
+				}
 			}
 			ZStack {
 				Color.blue
