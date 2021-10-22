@@ -14,6 +14,7 @@ struct Visualisations: View {
     var body: some View {
 		VStack{
 			VisualisationContainer(currentVisualisation: $currentVisualisation)
+			
 			Spacer()
 			
 			CompetitiveVisualisation()
@@ -29,8 +30,7 @@ struct VisualisationContainer: View {
 	var body: some View {
 		PagerView(pageCount: 3, currentIndex: $currentVisualisation) {
 			ZStack {
-				Color.red
-				Text("Area for visualisation 1")
+				CompetitiveVisualisation()
 			}
 			ZStack {
 				GeometryReader { geo in
@@ -41,12 +41,11 @@ struct VisualisationContainer: View {
 				}
 			}
 			ZStack {
-				Color.blue
-				Text("Visualisation 3")
+				CompetitiveVisualisation()
 			}
 		}
 		.foregroundColor(.white)
-		.frame(height: 250)
+		.frame(height: 175)
 	}
 	
 }
